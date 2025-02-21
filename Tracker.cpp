@@ -12,9 +12,10 @@ Tracker::~Tracker() {
 
 }
 
-void Tracker::addCities(std::string name, double longitude, double latitude) {
+void Tracker::addCities(std::string name, int population, double longitude, double latitude) {
     cityData& inputData = cityMap[name];
     inputData.this->name = name;
+    inputData.this->population = population;
     inputData.this->longitude = longitude;
     inputData.this->latitude = latitude;
 }

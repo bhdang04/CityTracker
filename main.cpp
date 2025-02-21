@@ -1,27 +1,48 @@
 #include "Tracker.h"
+#include <termios.h>
+#include <cstdlib>
+#include <unistd.h>
+#include <stdio.h>
 
 void exit();
 
 int main() {
-    Tracker();
+    Tracker globalMap();
     std::string cityName;
+    int cityPopulation;
+    double cityLat, cityLong;
     int choices = 0;
     
     do { 
-        cout << "<-------- Choose Options (1-5) -------->" << endl;
-        cout << "1. Add to List\n" 
-            << "2. Remove to List\n"
-            << "3. Manage List\n"
+        std::cout << "<-------- Choose Options (1-5) -------->" << std::endl;
+        std::cout << "1. Add to Map\n" 
+            << "2. Update Population\n"
+            << "3. Remove Country\n"
             << "4. View List\n"
             << "5. Quit Application\n";
-        cout << "Pick a number to select that option: ";
-        cin >> choices;
+        std::cout << "Pick a number to select that option: ";
+        std::cin >> choices;
 
         system("clear");
         switch (choices) {
             case 1:
-                entries = add(entries, toDoArr);
-                cout << "Added Successfully" << endl;
+                std::cout << "City Name: ";
+                std::cin >> cityName;
+
+                std::cout << "City Population: ";
+                cin.ignore();
+                std::cin >> cityPopulation;
+
+                std::cout << "Latitude: ";
+                cin.ignore();
+                std::cin >> cityLat;
+
+                std::cout << "Longitude: ";
+                cin.ignore();
+                std::cin >> cityLong;
+
+                globalMap.addCities(cityName, cityPopulation, cityLat, cityLong);
+                std::cout << "Added Successfully" << std::endl;
                 exit();
                 break;
             case 2:
@@ -51,7 +72,7 @@ int main() {
 }
 
 void exit() {
-    cout << "Press Any Key To Exit..." << endl;
+    std::cout << "Press Any Key To Exit..." << std::endl;
     
     // Disable buffering and echo
     termios oldt, newt;
