@@ -1,13 +1,14 @@
 #include "Tracker.h"
-#include <termios.h>
 #include <cstdlib>
 #include <unistd.h>
 #include <stdio.h>
+#include <iostream>
+#include <conio.h>
 
-void exit();
+void waitForKeyPress();
 
 int main() {
-    Tracker globalMap();
+    Tracker globalMap;
     std::string cityName;
     int cityPopulation;
     double cityLat, cityLong;
@@ -30,40 +31,52 @@ int main() {
                 std::cin >> cityName;
 
                 std::cout << "City Population: ";
-                cin.ignore();
+                std::cin.ignore();
                 std::cin >> cityPopulation;
 
                 std::cout << "Latitude: ";
-                cin.ignore();
+                std::cin.ignore();
                 std::cin >> cityLat;
 
                 std::cout << "Longitude: ";
-                cin.ignore();
+                std::cin.ignore();
                 std::cin >> cityLong;
 
                 globalMap.addCities(cityName, cityPopulation, cityLat, cityLong);
                 std::cout << "Added Successfully" << std::endl;
-                exit();
+                waitForKeyPress();
                 break;
             case 2:
-                entries = remove(entries, toDoArr);
-                cout << "Deleted Successfully" << endl;
-                exit();
+                std::cout << "Update City Population: ";
+                std::cin.ignore();
+                std::cin >> cityPopulation;
+
+                std::cout << "Update City Population: ";
+                std::cin.ignore();
+                std::cin >> cityPopulation;
+
+                globalMap.updatePopulation(cityName, cityPopulation);
+                std::cout << "Updated Successfully" << std::endl;
+                waitForKeyPress();
                 break;
             case 3:
-                manage(entries, toDoArr);
-                cout << "Swapped Successfully" << endl;
-                exit();
+                std::cout << "Select a City to Remove: ";
+                std::cin.ignore();
+                getline(std::cin, cityName);
+
+                globalMap.removeCity(cityName);
+                std::cout << "Removed Successfully" << std::endl;
+                waitForKeyPress();
                 break;
             case 4:
-                view(entries, toDoArr);
-                exit();
+                globalMap.printCity();
+                waitForKeyPress();
                 break;
             case 5:
-                cout << "Successfully Closed\n";
+                std::cout << "Successfully Closed\n";
                 break;
             default: 
-                cerr << "\nInvalid Option";
+                std::cerr << "\nInvalid Option";
                 break;               
         }
         system("clear");
@@ -71,20 +84,13 @@ int main() {
 
 }
 
-void exit() {
+void waitForKeyPress() {
     std::cout << "Press Any Key To Exit..." << std::endl;
     
-    // Disable buffering and echo
-    termios oldt, newt;
-    tcgetattr(STDIN_FILENO, &oldt); // Get current terminal settings
-    newt = oldt;
-    newt.c_lflag &= ~(ICANON | ECHO); // Disable canonical mode and echo
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt); // Apply new settings
+    // Wait for a key press
+    while (!_kbhit()) {
+        // Do nothing, just wait for input
+    }
 
-    // Read a single character
-    char ch;
-    read(STDIN_FILENO, &ch, 1);
-
-    // Restore original terminal settings
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    _getch(); // Read the key press
 }
