@@ -28,10 +28,10 @@ int main() {
         switch (choices) {
             case 1:
                 std::cout << "City Name: ";
-                std::cin >> cityName;
+                std::cin.ignore();
+                std::getline(std::cin, cityName);
 
                 std::cout << "City Population: ";
-                std::cin.ignore();
                 std::cin >> cityPopulation;
 
                 std::cout << "Latitude: ";
@@ -47,12 +47,11 @@ int main() {
                 waitForKeyPress();
                 break;
             case 2:
-                std::cout << "Update City Population: ";
+                std::cout << "Select City: ";
                 std::cin.ignore();
-                std::cin >> cityPopulation;
+                std::getline(std::cin, cityName);
 
                 std::cout << "Update City Population: ";
-                std::cin.ignore();
                 std::cin >> cityPopulation;
 
                 globalMap.updatePopulation(cityName, cityPopulation);
