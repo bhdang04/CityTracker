@@ -35,11 +35,9 @@ int main() {
                 std::cin >> cityPopulation;
 
                 std::cout << "Latitude: ";
-                std::cin.ignore();
                 std::cin >> cityLat;
 
                 std::cout << "Longitude: ";
-                std::cin.ignore();
                 std::cin >> cityLong;
 
                 globalMap.addCities(cityName, cityPopulation, cityLat, cityLong);

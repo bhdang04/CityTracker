@@ -40,7 +40,7 @@ void Tracker::removeCity(std::string name) {
 
 cityData Tracker::cityInfo(std::string name) {
     if (cityMap.find(name) != cityMap.end()) {
-        std::cout << "Name: " << name << std::endl
+        std::cout << "Name: " << cityMap[name].name << std::endl
             << "Population: " << cityMap[name].population << std::endl
             << "Longitude: " << cityMap[name].longitude << std::endl
             << "Latitude: " << cityMap[name].latitude << std::endl;
