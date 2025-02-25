@@ -4,6 +4,7 @@
 #include <string>
 #include <unordered_map>
 #include <map>
+#include <cmath>
 
 struct cityData {
     std::string name;
@@ -35,6 +36,8 @@ public:
     cityData cityInfo(std::string name);
     void sortedCity();
     void printCity();
+    double haversine(double lat1, double lon1, double lat2, double lon2);
+    void closestCity(std::string name);
 };
 
 #endif 
