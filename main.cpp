@@ -67,7 +67,11 @@ int main() {
                 waitForKeyPress();
                 break;
             case 4:
-                std::cout << "Select a City to Remove: ";
+                std::cout << "Select a starting city: ";
+                std::cin.ignore();
+                std::getline(std::cin, cityName);
+                
+                globalMap.closestCity(cityName);
                 waitForKeyPress();
                 break;
             case 5:
