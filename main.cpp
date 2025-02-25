@@ -19,8 +19,9 @@ int main() {
         std::cout << "1. Add to Map\n" 
             << "2. Update Population\n"
             << "3. Remove Country\n"
-            << "4. View List\n"
-            << "5. Quit Application\n";
+            << "4. Closest City.\n"
+            << "5. View List\n"
+            << "6. Quit Application\n";
         std::cout << "Pick a number to select that option: ";
         std::cin >> choices;
 
@@ -66,10 +67,14 @@ int main() {
                 waitForKeyPress();
                 break;
             case 4:
-                globalMap.printCity();
+                std::cout << "Select a City to Remove: ";
                 waitForKeyPress();
                 break;
             case 5:
+                globalMap.printCity();
+                waitForKeyPress();
+                break;
+            case 6:
                 std::cout << "Successfully Closed\n";
                 break;
             default: 
@@ -77,7 +82,7 @@ int main() {
                 break;               
         }
         system("clear");
-    } while (choices != 5);
+    } while (choices != 6);
 
 }
 

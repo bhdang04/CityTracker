@@ -82,10 +82,23 @@ double Tracker::haversine(double lat1, double lon1, double lat2, double lon2) {
     return rad * c;
 }
 
-void Tracker::closestCity(std::string city) {
+std::string Tracker::closestCity(std::string city) {
     double lowest = 0;
-    
-    for (const auto& name : cityMap) {
-        if (haversine())
+    std::string closest = "";
+    for (const auto& pair : cityMap) {
+        const std::string& name = pair.first;
+        const cityData& otherCity = pair.second;
+
+        if (name == city) continue;
+
+        double distance = haversine(cityMap[city].latitude, cityMap[city].longitude,
+                                        otherCity.latitude, otherCity.longitude);
+
+        if (distance < lowest) {
+            lowest = distance;
+            closest = name;
+        }
     }
+
+    return closest;
 }

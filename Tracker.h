@@ -37,7 +37,7 @@ public:
     void sortedCity();
     void printCity();
     double haversine(double lat1, double lon1, double lat2, double lon2);
-    void closestCity(std::string name);
+    std::string closestCity(std::string name);
 };
 
 #endif 
